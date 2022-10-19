@@ -125,6 +125,13 @@ class database():
 		for i in range(len(beginning._list)):
 			print(indent + beginning._list[i]._name)
 			if beginning._list[i]._list: self.display(beginning._list[i], indent+' ')
+				
+	def get_help(self):
+		'''
+		Return documentation on methods of all object_type objects in the database for User convenience.
+		'''
+		for i in range(len(self._list)):
+			help(self._list[i]._list[i])
 		
 
 # Object Type Superclass, second layer
