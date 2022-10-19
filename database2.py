@@ -2,6 +2,11 @@
 
 class database():
 	#the main interface for all subclasses
+	'''
+	Represents the entire database as an object.
+	Comes as one object w/ a name and a list built to work as an interface
+        for all incoming commands, running them with the execute method below.
+	'''
 	def __init__(self, list_of_object_types = [], name = 'default'):
 
 		self._name = name
@@ -15,9 +20,11 @@ class database():
 
 	def execute(self, command_list):
 		'''
-		takes list of commands in any order
-		iterate through until object appropriate to acting layer is found
-		execute target
+		Process:
+                1. takes list of commands in any order
+                2. iterate through until object appropriate to acting
+                layer is found
+                3. execute target
 		'''
 
 		i = 0
