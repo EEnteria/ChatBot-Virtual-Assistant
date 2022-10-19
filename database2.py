@@ -3,8 +3,11 @@ import speech_recognition as sr
 #Database, first layer
 
 class database():
-	#the main interface for all subclasses
+	#the main interface for all subclasses, commands, etc. Run everything through this object.
 	def __init__(self, list_of_object_types = [], name = 'default'):
+		'''
+		Create database object, should generally have no arguments.
+		'''
 
 		self._name = name
 		self._list = list_of_object_types
@@ -16,6 +19,14 @@ class database():
 		"""
 
 	def run(self, m=sr.Microphone(), r=sr.Recognizer()):
+		'''
+		THIS IS THE PRIMARY COMMAND. RUN THIS TO BEGIN THE PROGRAM.
+		Takes microphone and recognizer object arguments as specified in speech_recognition library. Not necessary to give.
+		Waits for user input, then begins.
+		Runs listen_for_input(microphone, recognizer), then passes its returned audio_string to
+		translate(audio_string) which converts the string to a list formatted ['word1', 'word2', 'etc'], which is then passed to 
+		execute(command_list)
+		'''
 		print("Hello! Press <ENTER> to begin!")
 		input()
 
@@ -24,9 +35,10 @@ class database():
 
 	def execute(self, command_list):
 		'''
-		takes list of commands in any order
-		iterate through until object appropriate to acting layer is found
-		execute target
+		This method takes list of commands in any order to be executed.
+		It iterates through the command_list until an object appropriate to acting layer is found. (database --> object_type --> object)
+		It finally passes the target object to execute. (This is a recursive function.)
+		(Objects will have unique execute methods dependent on their object_type. See test_object class for an example.)
 		'''
 
 		i = 0
@@ -44,6 +56,10 @@ class database():
 		if not command_found: raise Exception("Command not found, sorry...")
 
 	def listen_for_input(self, m=sr.Microphone(), r=sr.Recognizer()):
+		'''
+		This method takes microphone and recognizer objects as specified in the speech_recognition library, and returns a string of decoded audio.
+		The User must provide input to confirm that the recognized_audio_string is accurate to what was spoken.
+		'''
 		
 		answer = 'N'
 
@@ -72,6 +88,9 @@ class database():
 
 
 	def translate(self, audio_string):
+		'''
+		This method takes an audio_string (from listen_for_input method) and translates it to a list of words to be returned (and later passed to execute method.)
+		'''
 		translated_command_list = ['']
 
 		for i in range(len(audio_string)):
@@ -113,9 +132,15 @@ class database():
 class object_type(database):
 	#abstract class holding pointers to the actual objects
 	def __init__(self, name, list_of_objects = []):
+		'''
+		Initialize a new object_type object with given name.
+		'''
 		database.__init__(self, list_of_objects, name)
 
 	def create_object(self, object):
+		'''
+		Place a given object of object_type into object_type's list. Mandatory for execution.
+		'''
 		self._list.append(object)
 
 
