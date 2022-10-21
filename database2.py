@@ -41,19 +41,15 @@ class database():
 		(Objects will have unique execute methods dependent on their object_type. See test_object class for an example.)
 		'''
 
-		i = 0
-		command_found = False
-		while command_list != []:
+		if command_list != []:
+			#print(len(self._list))
 			for j in range(len(self._list)):
-				if command_list[i] == self._list[j]._name:
-					#print('word ' + command_list[i] + ' recognized!')
-					command_found = True
-					command_list.pop(i)
-					if command_list == []: self._list[j].execute()
-					else: self._list[j].execute(command_list)
-			if command_found == False: command_list.pop(i)
-			i+=1
-		if not command_found: raise Exception("Command not found, sorry...")
+				#print(str(command_list[0])+", "+str(self._list[j]._name))
+				if command_list.pop(0) == self._list[j]._name:
+					print('word ' + self._list[j]._name + ' recognized!')
+					self._list[j].execute(command_list)
+				else: self.execute(command_list)
+
 
 	def listen_for_input(self, m=sr.Microphone(), r=sr.Recognizer()):
 		'''
@@ -159,7 +155,7 @@ class test_object(object_type):
 		self._name = name
 		self._list = None
 
-	def execute(self):
+	def execute(self, command_list):
 		print("Hello!")
 
 if __name__ == "__main__":
@@ -191,9 +187,7 @@ if __name__ == "__main__":
 	'''
 	print('translation test:')
 	print()
-
 	print(example_database.translate(example_database.listen_for_input()))
-
 	for i in range(5): print()
 	print('F I N A L   T E S T :')
 	print()
@@ -201,3 +195,9 @@ if __name__ == "__main__":
 
 
 	example_database.run()
+
+	for i in range(5): print()
+	print('Test help function.')
+	print()
+
+	example_database.get_help()
