@@ -25,16 +25,16 @@ class google_search_command(object_type):
         query = ""
 
         #Narrows down which part is the search
-        for i in range(0, len(args - 1)):
+        for i in range(0, len(args) - 1):
             #Conditions it searches for is "search" and the keywords above.
                 #First condtion, takes everything after search and adds spaces to make it readable by google
                 if args[i] == "search":
-                    for j in range(i + 1, len(args - 1)):
+                    for j in range(i + 1, len(args) - 1):
                         query += args[j] + " "
                         
                     break #Implement grabbing everything in a second, use a for loop?
                 elif args[i] in keywords:
-                    for j in range(i, len(args - 1)):
+                    for j in range(i, len(args) - 1):
                         query += args[j] + " "
                     break
                        
