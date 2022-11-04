@@ -6,7 +6,7 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 sys.path.append(parent)
 
-from database2 import object_type
+from database2 import object_type, database
 
 class google_search_command(object_type):
 
@@ -34,7 +34,7 @@ class google_search_command(object_type):
                         
                     break #Implement grabbing everything in a second, use a for loop?
                 elif args[i] in keywords:
-                    for j in range(i, len(args - 1):
+                    for j in range(i, len(args - 1)):
                         query += args[j] + " "
                     break
                        
