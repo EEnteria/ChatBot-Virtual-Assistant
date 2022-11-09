@@ -1,5 +1,5 @@
 import sys #Imported to bring the files from 1 layer above
-from database2 import object_type
+from database2 import object_type, database
 from datetime import datetime
 
 #Date-time works
