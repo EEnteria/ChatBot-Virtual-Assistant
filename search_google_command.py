@@ -28,7 +28,7 @@ class google_search_command(object_type):
         for i in range(0, len(args) - 1):
             #Conditions it searches for is "search" and the keywords above.
                 #First condtion, takes everything after search and adds spaces to make it readable by google
-                if args[i] == "search":
+                if args[i] == "for":
                     for j in range(i + 1, len(args) - 1):
                         query += args[j] + " "
                         
